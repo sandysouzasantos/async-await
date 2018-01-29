@@ -70,9 +70,27 @@ const getStatus = (userId) => {
 
 };
 
-const getStatus
+getStatusAlt = async (userId) => {
+    const user = await getUser(userId);
+    const grades = await getGrades(user.schoolId);
 
-getStatus(2).then((status) => {
+    let average = 0;
+
+    if (grades.length > 0) {
+        average = grades.map((grade) => grade.grade).reduce((a, b) => a + b) / grades.length;
+    }
+
+    return `${user.name} has a ${average}% in the class.`;
+};
+
+getStatusAlt(1).then((status) => {
+    console.log(status);
+}).catch((e) => {
+    console.log(e);
+});
+
+
+/*getStatus(2).then((status) => {
 
     console.log(status);
 
@@ -80,9 +98,9 @@ getStatus(2).then((status) => {
 
     console.log(e);
 
-});
+});*/
 
-getUser(2).then((user) => {
+/*getUser(2).then((user) => {
 
     console.log(user);
 
@@ -90,8 +108,9 @@ getUser(2).then((user) => {
 
     console.log(e);
 
-});
+});*/
 
+/*
 getGrades(101).then((grade) => {
 
     console.log(grade);
@@ -100,4 +119,4 @@ getGrades(101).then((grade) => {
 
     console.log(e);
 
-});
+});*/
